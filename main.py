@@ -9,14 +9,14 @@ app.config['DEBUG'] = True
 
 def index(): 
         
-    encrypt_form = """
+    form = """
          <!DOCTYPE html>
 
             <html>
                 <head>
                     <style>
                         form {{
-                            background: #ffffff;
+                            background: #fcfcfc;
                             padding: 20px;
                             margin: 0 auto;
                             width: 540px;
@@ -33,7 +33,7 @@ def index():
                     </style>
                 </head>
                 <body>
-                  <form action="/" method="post">
+                  <form action="/form" method="post">
                         <div>
                             <label for="rot">Rotate by:</label>
                             <input type="text" name="rot" value="0">
@@ -50,11 +50,12 @@ def index():
          
     return form.format(" ")
 
-@app.route("/", methods=['POST'])
-def encrypt(rotate_string):
-    text = rotate_string(text)
+@app.route("/form", methods=['POST'])
+def encrypt():
+
+    encrypt_text = rotate_string(text, rot)
     
-    content = "<h1>" + text + "</h1>"
+    content = "<h1>" + encrypt_text + "</h1>"
 
     return form.format(content)
 
